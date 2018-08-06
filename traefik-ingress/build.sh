@@ -4,7 +4,7 @@ source ../env.sh
 
 kubectl create secret generic traefik-ssl --from-file=/etc/kubernetes/ssl/ca-key.pem --from-file=/etc/kubernetes/ssl/ca.pem -n kube-system
 
-cat >> ingress-rbac.yaml << EOF
+cat > ingress-rbac.yaml << EOF
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -25,7 +25,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 EOF
 
-cat >> traefik-daemonset.yaml << EOF
+cat > traefik-daemonset.yaml << EOF
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -99,7 +99,7 @@ spec:
           secretName: traefik-ssl
 EOF
 
-cat >> traefik-ingress.yaml << EOF
+cat > traefik-ingress.yaml << EOF
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -115,7 +115,7 @@ spec:
           servicePort: 80
 EOF
 
-cat >> traefik-ui.yaml << EOF
+cat > traefik-ui.yaml << EOF
 apiVersion: v1
 kind: Service
 metadata:
