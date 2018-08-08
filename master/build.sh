@@ -142,6 +142,7 @@ ExecStart=$(which kube-apiserver) \\
   --insecure-bind-address=${NODE_IP} \\
   --authorization-mode=Node,RBAC \\
   --runtime-config=rbac.authorization.k8s.io/v1alpha1 \\
+  --runtime-config=batch/v2alpha1=true \\
   --kubelet-https=true \\
   --enable-bootstrap-token-auth \\
   --token-auth-file=/etc/kubernetes/token.csv \\
