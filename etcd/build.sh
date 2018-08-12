@@ -52,8 +52,8 @@ cfssl gencert -ca=/etc/kubernetes/ssl/ca.pem \
     -profile=kubernetes etcd-csr.json | cfssljson -bare etcd
 
 mkdir -p /etc/etcd/ssl
-chown etcd:etcd etcd*.pem
 cp etcd*.pem /etc/etcd/ssl/
+chown etcd:etcd /etc/etcd/ssl/etcd*.pem
 
 
 cat > etcd.conf <<EOF
