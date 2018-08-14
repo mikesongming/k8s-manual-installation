@@ -2,7 +2,9 @@
 
 source ../env.sh
 
-NODE_IP=192.168.137.104
+NODE_IP=192.168.99.100
+
+sed -i "/${NODE_IP}/s/$/ k8s-api.virtual.local k8s-api/" /etc/hosts
 
 cat > kubernetes-csr.json <<EOF
 {
@@ -241,3 +243,7 @@ else
     exit 1
 fi
 cp -f kube-scheduler.service /usr/lib/systemd/system/
+
+# RBAC
+kubectl create clusterrolebinding kubelet-bootstrap --clusterrole=system:node-bootstrapper --user=kubelet-bootstrap
+kubectl create clusterrolebinding kubelet-nodes --clusterrole=system:node --group=system:nodes
