@@ -1,20 +1,25 @@
 #!/bin/bash
 
-export NODE_NAME=test05 # 当前部署的机器名称(随便定义，只要能区分不同机器即可)
-export NODE_IP=192.168.137.104 # 当前部署的机器IP
-export NODE_IPS="192.168.137.104 192.168.137.103 192.168.137.102" # etcd 集群所有机器 IP
+export NODE_NAME=test01 # 当前部署的机器名称(随便定义，只要能区分不同机器即可)
+export NODE_IP=192.168.99.100 # 当前部署的机器IP
+export NODE_IPS="192.168.99.100 192.168.99.101 192.168.99.102" # etcd 集群所有机器 IP
 # etcd 集群间通信的IP和端口
-export ETCD_NODES="test05=https://192.168.137.104:2380,test04=https://192.168.137.103:2380,test03=https://192.168.137.102:2380"
+export ETCD_NODES="test01=https://192.168.99.100:2380,node1=https://192.168.99.101:2380,node2=https://192.168.99.102:2380"
 # 导入用到的其它全局变量：ETCD_ENDPOINTS、FLANNEL_ETCD_PREFIX、POD_CIDR
 
 # Pod 网段(Cluster CIDR)，部署前路由不可达，部署后路由可达(flanneld 保证)
 POD_CIDR="10.236.0.0/16"
 
 # etcd集群服务地址列表
-ETCD_ENDPOINTS="https://192.168.137.104:2379,https://192.168.137.103:2379,https://192.168.137.102:2379"   # one ectd for demo
+ETCD_ENDPOINTS="https://192.168.99.100:2379,https://192.168.99.101:2379,https://192.168.99.102:2379"   # one ectd for demo
 
 # flanneld 网络配置前缀
 FLANNEL_ETCD_PREFIX="/sf.longfor/network"
+
+# stop service firewalld, iptables
+systemctl stop firewalld && systemctl disable firewalld
+systemctl stop iptables && systemctl disable iptables
+
 
 cat > etcd-csr.json <<EOF
 {
