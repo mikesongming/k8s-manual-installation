@@ -19,3 +19,4 @@ master/kube-scheduler.service
 master/kubernetes-csr.json
 master/kubernetes.csr
 master/token.csv
+dns/kube-dns.yaml
