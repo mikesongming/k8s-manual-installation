@@ -20,3 +20,6 @@ master/kubernetes-csr.json
 master/kubernetes.csr
 master/token.csv
 dns/kube-dns.yaml
+node/docker.service
+node/kube-proxy.service
+node/kubelet.service
