@@ -23,3 +23,5 @@ dns/kube-dns.yaml
 node/docker.service
 node/kube-proxy.service
 node/kubelet.service
+helm/linux-amd64/
+helm/rbac-config.yaml
