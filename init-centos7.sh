@@ -38,3 +38,14 @@ yum install -y epel-release
 yum -y update
 yum group install "Development Tools"
 yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel sip-devel tcl-devel
+
+## aliyun docker registry mirror
+#mkdir -p /etc/docker
+#tee /etc/docker/daemon.json <<-'EOF'
+#{
+#    "registry-mirrors": ["https://sklfn246.mirror.aliyuncs.com"]
+#
+#}
+#EOF
+#systemctl daemon-reload
+#systemctl restart docker
