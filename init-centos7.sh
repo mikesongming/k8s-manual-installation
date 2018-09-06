@@ -26,6 +26,9 @@ echo "* hard nproc 65536" >> /etc/security/limits.conf
 echo "* soft memlock unlimited" >> /etc/security/limits.conf
 echo "* hard memlock unlimited" >> /etc/security/limits.conf
 
+yum isntall -y yum-utils
+yum install -y epel-release
+
 # yum set aliyun source
 yum-config-manager --add-repo http://mirrors.aliyun.com/repo/Centos-7.repo
 mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.orig
@@ -34,7 +37,6 @@ mv /etc/yum.repos.d/Centos-7.repo /etc/yum.repos.d/CentOS-Base.repo
 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 
 yum makecache fast
-yum install -y epel-release
 yum -y update
 yum group install "Development Tools"
 yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel sip-devel tcl-devel
