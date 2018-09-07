@@ -31,7 +31,7 @@ services:
       - ${DRONE_PORT}:8000
       - 9000
     volumes:
-      - /root/gogs-drone/drone_data:/var/lib/drone/
+      - ${DRONE_LOCAL}:/var/lib/drone/
     restart: always
     environment:
       - DRONE_OPEN=true
