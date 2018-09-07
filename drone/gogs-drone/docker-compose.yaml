@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  drone-server:
+    image: drone/drone:0.8
+
+    ports:
+      - 9080:8000
+      - 9000
+    volumes:
+      - /root/gogs-drone/drone_data:/var/lib/drone/
+    restart: always
+    environment:
+      - DRONE_OPEN=true
+      - DRONE_HOST=http://192.168.56.102
+      - DRONE_GOGS=true
+      - DRONE_GOGS_URL=http://192.168.56.102:3000
+      - DRONE_SECRET=hello1234
+
+  drone-agent:
+    image: drone/agent:0.8
+
+    restart: always
+    depends_on:
+      - drone-server
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DRONE_SERVER=drone-server:9000
+      - DRONE_SECRET=hello1234
